@@ -17,9 +17,11 @@ Welcome Image API allows you to generate custom welcome images by specifying var
 - **Required:** No
 - **Default:** `"Usuario"`
 - **Example:**
-  \```bash
+
+  ```bash
   curl -X GET "http://localhost:3000/canvas/generate-welcome?username=AverageJohnny"
-  \```
+  ```
+
 - **Effect:** Displays "AverageJohnny" as the username in the generated image.
 
 ### 2. `avatarUrl` (string)
@@ -27,9 +29,9 @@ Welcome Image API allows you to generate custom welcome images by specifying var
 - **Required:** No
 - **Default:** Default avatar provided by the API.
 - **Example:**
-  \```bash
+  ```bash
   curl -X GET "http://localhost:3000/canvas/generate-welcome?avatarUrl=https://via.placeholder.com/150"
-  \```
+  ```
 - **Effect:** Uses the image at the specified URL as the avatar in the generated image.
 
 ### 3. `backgroundUrl` (string)
@@ -37,9 +39,9 @@ Welcome Image API allows you to generate custom welcome images by specifying var
 - **Required:** No
 - **Default:** Default background provided by the API.
 - **Example:**
-  \```bash
+  ```bash
   curl -X GET "http://localhost:3000/canvas/generate-welcome?backgroundUrl=https://via.placeholder.com/1920x1080"
-  \```
+  ```
 - **Effect:** Uses the image at the specified URL as the background in the generated image.
 
 ### 4. `logoUrl` (string)
@@ -47,9 +49,9 @@ Welcome Image API allows you to generate custom welcome images by specifying var
 - **Required:** No
 - **Default:** No logo is displayed if not provided.
 - **Example:**
-  \```bash
+  ```bash
   curl -X GET "http://localhost:3000/canvas/generate-welcome?logoUrl=https://via.placeholder.com/200x100"
-  \```
+  ```
 - **Effect:** Displays the specified logo image in the top right corner of the generated image.
 
 ### 5. `textColor` (string)
@@ -57,9 +59,9 @@ Welcome Image API allows you to generate custom welcome images by specifying var
 - **Required:** No
 - **Default:** `#FFFFFF` (White)
 - **Example:**
-  \```bash
+  ```bash
   curl -X GET "http://localhost:3000/canvas/generate-welcome?textColor=%23FF0000"
-  \```
+  ```
 - **Effect:** Sets the text color in the image to the specified color, in this case, red (`#FF0000`).
 
 ### 6. `borderColor` (string)
@@ -67,9 +69,9 @@ Welcome Image API allows you to generate custom welcome images by specifying var
 - **Required:** No
 - **Default:** `#FF0000` (Red)
 - **Example:**
-  \```bash
+  ```bash
   curl -X GET "http://localhost:3000/canvas/generate-welcome?borderColor=%2300FF00"
-  \```
+  ```
 - **Effect:** Sets the border color around the avatar to the specified color, in this case, green (`#00FF00`).
 
 ### 7. `customText` (string)
@@ -77,16 +79,16 @@ Welcome Image API allows you to generate custom welcome images by specifying var
 - **Required:** No
 - **Default:** `"Gracias por estar con nosotros"`
 - **Example:**
-  \```bash
+  ```bash
   curl -X GET "http://localhost:3000/canvas/generate-welcome?customText=Welcome%20to%20the%20community!"
-  \```
+  ```
 - **Effect:** Displays the custom text provided in the generated image.
 
 ## Example Request with All Parameters
 
-\```bash
+```bash
 curl -X GET "http://localhost:3000/canvas/generate-welcome?username=AverageJohnny&avatarUrl=https://via.placeholder.com/150&backgroundUrl=https://via.placeholder.com/1920x1080&logoUrl=https://via.placeholder.com/200x100&textColor=%23FFFFFF&borderColor=%2300FF00&customText=Welcome%20to%20the%20community!"
-\```
+```
 
 ## Response
 
