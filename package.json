@@ -14,9 +14,11 @@
     "@fontsource/poppins": "^5.0.14",
     "axios": "^1.7.2",
     "canvas": "^2.11.2",
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "jimp": "^1.6.0",
+    "sharp": "^0.33.5"
   },
   "devDependencies": {
-    "nodemon": "^3.1.4"
+    "nodemon": "^3.1.7"
   }
 }
