@@ -10,6 +10,7 @@ exports.generateCuteWelcomeImage = async (req, res) => {
   const username = (req.query.username || 'Nombre de Usuario').toUpperCase();
   const groupName = (req.query.groupName || 'Nombre del Grupo').toUpperCase();
   const avatarUrl = req.query.avatarUrl || '';
+  const logoUrl = req.query.logoUrl || ''
 
   const width = 1000;
   const height = 350;
@@ -41,6 +42,14 @@ exports.generateCuteWelcomeImage = async (req, res) => {
   } catch (error) {
     console.error('Error al cargar el avatar:', error);
     avatar = await loadImage(path.join(__dirname, '..', 'assets', 'default-avatar.png'));
+  }
+
+  let logo;
+  try {
+    logo = logoUrl ? await loadImage(logoUrl) : await loadImage(path.join(__dirname, '..', 'assets', 'default-avatar.png'));
+  } catch (error) {
+    console.error('Error al cargar el avatar:', error);
+    logo = await loadImage(path.join(__dirname, '..', 'assets', 'default-avatar.png'));
   }
 
   // Definir posición del avatar
@@ -85,6 +94,19 @@ exports.generateCuteWelcomeImage = async (req, res) => {
   context.fillStyle = '#FFFFFF';
   context.font = 'bold 35px Poppins';
   context.fillText(groupName, 50, 260 + spacingY); // Texto del nombre del grupo
+  // Avatar pequeño 
+  const smallAvatarSize = 99.5;
+  const smallAvatarX = 525;
+  const smallAvatarY = 220;
+  const borderRadius = 10;
+  
+  // Crear un rectángulo con esquinas redondeadas
+  context.beginPath();
+  context.roundRect(smallAvatarX, smallAvatarY, smallAvatarSize, smallAvatarSize, borderRadius);
+  context.clip();
+  
+  // Dibujar la imagen dentro del rectángulo
+  context.drawImage(logo, smallAvatarX, smallAvatarY, smallAvatarSize, smallAvatarSize);
 
   // Convertir el canvas a imagen y enviar como respuesta
   const buffer = canvas.toBuffer('image/png');
