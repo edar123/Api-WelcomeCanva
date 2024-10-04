@@ -6,7 +6,7 @@ registerFont(path.join(__dirname, '..', 'assets', 'fonts', 'Poppins-Bold.ttf'), 
 
 exports.generateCuteWelcomeImage = async (req, res) => {
   // Parámetros
-  const customText = (req.query.customText || 'BIENVENIDO/A'); // Texto de bienvenida
+  const customText = (req.query.customText || 'BIENVENIDO/A').toUpperCase();; // Texto de bienvenida
   const username = (req.query.username || 'Nombre de Usuario').toUpperCase();
   const groupName = (req.query.groupName || 'Nombre del Grupo').toUpperCase();
   const avatarUrl = req.query.avatarUrl || '';
