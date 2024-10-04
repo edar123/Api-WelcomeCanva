@@ -6,7 +6,7 @@ registerFont(path.join(__dirname, '..', 'assets', 'fonts', 'Poppins-Bold.ttf'), 
 
 exports.generateCuteWelcomeImage = async (req, res) => {
   // Parámetros
-  const welcomeText = (req.query.welcomeText || 'BIENVENIDO/A'); // Texto de bienvenida
+  const customText = (req.query.customText || 'BIENVENIDO/A'); // Texto de bienvenida
   const username = (req.query.username || 'Nombre de Usuario').toUpperCase();
   const groupName = (req.query.groupName || 'Nombre del Grupo').toUpperCase();
   const avatarUrl = req.query.avatarUrl || '';
@@ -82,7 +82,7 @@ exports.generateCuteWelcomeImage = async (req, res) => {
   drawRoundedRect(30, 30, 590, 140, 20, 'rgba(0, 0, 0, 0.5)'); // Bloque superior y medio
   context.fillStyle = '#FFFFFF';
   context.font = 'bold 35px Poppins';
-  context.fillText(welcomeText, 50, 80); // Texto Bienvenido/a
+  context.fillText(customText, 50, 80); // Texto Bienvenido/a
   context.font = 'bold 40px Poppins';
   context.fillText(username, 50, 150); // Texto del nombre de usuario
 
