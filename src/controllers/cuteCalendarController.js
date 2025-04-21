@@ -1,3 +1,4 @@
+import moment from 'moment-timezone';
 const { createCanvas, loadImage, registerFont } = require('canvas');
 const path = require('path');
 
@@ -12,11 +13,11 @@ exports.generateCuteCalendarImage = async (req, res) => {
   const monthParam = parseInt(req.query.month);
   const yearParam = parseInt(req.query.year);
 
-  const today = new Date();
-  const year = !isNaN(yearParam) ? yearParam : today.getFullYear();
-  const month = !isNaN(monthParam) ? monthParam - 1 : today.getMonth(); // 0-11
-  const currentDay = today.getDate();
-  const isCurrentMonth = year === today.getFullYear() && month === today.getMonth();
+  const now = moment().tz('America/Mexico_City');
+  const year = !isNaN(yearParam) ? yearParam : now.year();
+  const month = !isNaN(monthParam) ? monthParam - 1 : now.month();
+  const currentDay = now.date();
+  const isCurrentMonth = year === now.year() && month === now.month();
 
   // 🎨 Tamaño del canvas
   const canvasWidth = 1920;
@@ -116,3 +117,4 @@ exports.generateCuteCalendarImage = async (req, res) => {
   const buffer = canvas.toBuffer('image/png');
   res.type('image/png').send(buffer);
 };
+  
