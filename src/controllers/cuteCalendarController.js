@@ -1,7 +1,7 @@
 const { createCanvas, loadImage, registerFont } = require('canvas');
 const path = require('path');
 
-// ✅ Registrar fuente Poppins-Bold
+// ✅ Registrar fuente
 registerFont(path.join(__dirname, '..', 'assets', 'fonts', 'Poppins-Bold.ttf'), {
   family: 'Poppins Bold',
 });
@@ -9,7 +9,7 @@ registerFont(path.join(__dirname, '..', 'assets', 'fonts', 'Poppins-Bold.ttf'), 
 exports.generateCuteCalendarImage = async (req, res) => {
   const lang = req.query.lang || 'es';
   const country = (req.query.country || 'MX').toUpperCase();
-  const monthParam = parseInt(req.query.month); // 1-12
+  const monthParam = parseInt(req.query.month);
   const yearParam = parseInt(req.query.year);
 
   const today = new Date();
@@ -18,12 +18,13 @@ exports.generateCuteCalendarImage = async (req, res) => {
   const currentDay = today.getDate();
   const isCurrentMonth = year === today.getFullYear() && month === today.getMonth();
 
+  // 🎨 Tamaño del canvas
   const canvasWidth = 1920;
   const canvasHeight = 1080;
   const canvas = createCanvas(canvasWidth, canvasHeight);
   const ctx = canvas.getContext('2d');
 
-  // 🎨 Fondo pastel
+  // Fondo
   ctx.fillStyle = '#F3D1D1';
   ctx.fillRect(0, 0, canvasWidth, canvasHeight);
 
@@ -35,10 +36,10 @@ exports.generateCuteCalendarImage = async (req, res) => {
   ctx.textAlign = 'center';
   ctx.fillText(`${monthName} ${year}`, canvasWidth / 2, 90);
 
-  // 🧠 Semana inicia en lunes (excepto US, CA, PH...)
+  // ¿Semana inicia en lunes?
   const weekStartsOnMonday = !['US', 'CA', 'PH'].includes(country);
 
-  // 🔤 Nombres completos de días de la semana
+  // Nombres de los días (completos)
   const dayNames = [];
   for (let i = 0; i < 7; i++) {
     const base = new Date(2023, 0, weekStartsOnMonday ? i + 1 : i);
@@ -46,14 +47,14 @@ exports.generateCuteCalendarImage = async (req, res) => {
     dayNames.push(name.charAt(0).toUpperCase() + name.slice(1));
   }
 
-  // 📐 Layout
+  // Layout
   const marginX = 100;
   const marginY = 180;
   const cellWidth = (canvasWidth - marginX * 2) / 7;
   const cellHeight = 100;
 
-  // 🏷️ Encabezados
-  ctx.font = 'bold 30px "Poppins Bold"';
+  // Encabezados
+  ctx.font = '30px "Poppins Bold"';
   ctx.fillStyle = '#222';
   ctx.textAlign = 'center';
   dayNames.forEach((name, i) => {
@@ -61,49 +62,48 @@ exports.generateCuteCalendarImage = async (req, res) => {
     ctx.fillText(name, x, marginY);
   });
 
-  // 📆 Cálculo de días del mes
+  // 📆 Lógica de días del mes
   const firstDay = new Date(year, month, 1);
-  const rawStartDay = firstDay.getDay(); // 0 (domingo) - 6 (sábado)
-  const startDay = weekStartsOnMonday
-    ? (rawStartDay === 0 ? 6 : rawStartDay - 1)
-    : rawStartDay;
+  const dayOfWeek = firstDay.getDay(); // 0 = domingo
+  const offset = weekStartsOnMonday
+    ? (dayOfWeek === 0 ? 6 : dayOfWeek - 1)
+    : dayOfWeek;
 
   const totalDays = new Date(year, month + 1, 0).getDate();
-  const totalCells = totalDays + startDay;
-  const totalRows = Math.ceil(totalCells / 7);
 
   ctx.font = '28px "Poppins Bold"';
   ctx.textAlign = 'left';
 
-  let dayCounter = 1;
-  for (let row = 0; row < totalRows; row++) {
-    for (let col = 0; col < 7; col++) {
-      const cellIndex = row * 7 + col;
-      if (cellIndex < startDay || dayCounter > totalDays) continue;
+  let day = 1;
 
-      const x = marginX + col * cellWidth;
-      const y = marginY + (row + 1) * cellHeight + 10;
+  for (let i = 0; i < 6 * 7; i++) {
+    const row = Math.floor(i / 7);
+    const col = i % 7;
 
-      // 🟨 Día actual
-      if (isCurrentMonth && dayCounter === currentDay) {
-        ctx.fillStyle = '#FFF7';
-        ctx.fillRect(x, y, cellWidth, cellHeight);
-      }
+    if (i < offset || day > totalDays) continue;
 
-      // 🧱 Caja del día
-      ctx.strokeStyle = '#CCC';
-      ctx.lineWidth = 2;
-      ctx.strokeRect(x, y, cellWidth, cellHeight);
+    const x = marginX + col * cellWidth;
+    const y = marginY + (row + 1) * cellHeight + 10;
 
-      // ✏️ Número del día
-      ctx.fillStyle = '#000';
-      ctx.fillText(dayCounter.toString(), x + 10, y + 30);
-
-      dayCounter++;
+    // 🟡 Día actual
+    if (isCurrentMonth && day === currentDay) {
+      ctx.fillStyle = '#FFF7';
+      ctx.fillRect(x, y, cellWidth, cellHeight);
     }
+
+    // Caja
+    ctx.strokeStyle = '#CCC';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(x, y, cellWidth, cellHeight);
+
+    // Número del día
+    ctx.fillStyle = '#000';
+    ctx.fillText(day.toString(), x + 10, y + 30);
+
+    day++;
   }
 
-  // 🐰 Imagen decorativa (abajo izquierda)
+  // 🐰 Imagen decorativa
   try {
     const bunny = await loadImage(path.join(__dirname, '..', 'assets', 'conejo-calendar.png'));
     const size = 180;
@@ -112,7 +112,7 @@ exports.generateCuteCalendarImage = async (req, res) => {
     console.error('No se pudo cargar la imagen decorativa:', err);
   }
 
-  // 🖼️ Enviar imagen PNG
+  // Output
   const buffer = canvas.toBuffer('image/png');
   res.type('image/png').send(buffer);
 };
