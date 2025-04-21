@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Welcome Image API</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100 text-gray-800 font-sans">
+
+    <div class="max-w-6xl mx-auto p-8">
+      <h1 class="text-5xl font-bold text-indigo-600 mb-6">Welcome Image API</h1>
+      <p class="mb-10 text-lg">Generá imágenes de bienvenida y calendarios.</p>
+
+      <!-- ========== ENDPOINT: GENERATE-WELCOME ========== -->
+      <section class="mb-16">
+        <h2 class="text-3xl font-semibold text-indigo-700 mb-4">🧾 /canvas/generate-welcome</h2>
+        <p class="mb-2">Imagen de bienvenida estándar.</p>
+        <code class="block bg-gray-200 text-sm p-3 rounded mb-4">GET /canvas/generate-welcome</code>
+
+        <h3 class="text-xl font-semibold mb-2">Parámetros:</h3>
+        <table class="w-full text-left border-collapse border border-gray-300 mb-4">
+          <thead class="bg-gray-200">
+            <tr>
+              <th class="px-4 py-2 border">Parámetro</th>
+              <th class="px-4 py-2 border">Tipo</th>
+              <th class="px-4 py-2 border">Default</th>
+              <th class="px-4 py-2 border">Descripción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="border px-4 py-2">username</td><td class="border px-4 py-2">string</td><td class="border px-4 py-2">"Usuario"</td><td class="border px-4 py-2">Nombre del usuario.</td></tr>
+            <tr><td class="border px-4 py-2">avatarUrl</td><td class="border px-4 py-2">string</td><td class="border px-4 py-2">Default</td><td class="border px-4 py-2">URL del avatar del usuario.</td></tr>
+            <tr><td class="border px-4 py-2">backgroundUrl</td><td class="border px-4 py-2">string</td><td class="border px-4 py-2">Default</td><td class="border px-4 py-2">Imagen de fondo personalizada.</td></tr>
+            <tr><td class="border px-4 py-2">logoUrl</td><td class="border px-4 py-2">string</td><td class="border px-4 py-2">Ninguno</td><td class="border px-4 py-2">Logo que aparece en la esquina superior derecha.</td></tr>
+            <tr><td class="border px-4 py-2">textColor</td><td class="border px-4 py-2">hex</td><td class="border px-4 py-2">#FFFFFF</td><td class="border px-4 py-2">Color del texto.</td></tr>
+            <tr><td class="border px-4 py-2">borderColor</td><td class="border px-4 py-2">hex</td><td class="border px-4 py-2">#FF0000</td><td class="border px-4 py-2">Color del borde del avatar.</td></tr>
+            <tr><td class="border px-4 py-2">customText</td><td class="border px-4 py-2">string</td><td class="border px-4 py-2">"Gracias por estar con nosotros"</td><td class="border px-4 py-2">Texto principal.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- ========== ENDPOINT: CUTE-WELCOME ========== -->
+      <section class="mb-16">
+        <h2 class="text-3xl font-semibold text-pink-600 mb-4">🐰 /canvas/cute-welcome</h2>
+        <p class="mb-2">Imagen de bienvenida estilo kawaii, con avatar redondo y fondo oscuro.</p>
+        <code class="block bg-gray-200 text-sm p-3 rounded mb-4">GET /canvas/cute-welcome</code>
+
+        <h3 class="text-xl font-semibold mb-2">Parámetros:</h3>
+        <table class="w-full text-left border-collapse border border-gray-300 mb-4">
+          <thead class="bg-gray-200">
+            <tr>
+              <th class="px-4 py-2 border">Parámetro</th>
+              <th class="px-4 py-2 border">Tipo</th>
+              <th class="px-4 py-2 border">Default</th>
+              <th class="px-4 py-2 border">Descripción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="border px-4 py-2">username</td><td class="border px-4 py-2">string</td><td class="border px-4 py-2">"Nombre de Usuario"</td><td class="border px-4 py-2">Nombre que se mostrará.</td></tr>
+            <tr><td class="border px-4 py-2">customText</td><td class="border px-4 py-2">string</td><td class="border px-4 py-2">"BIENVENIDO/A"</td><td class="border px-4 py-2">Texto principal de bienvenida.</td></tr>
+            <tr><td class="border px-4 py-2">groupName</td><td class="border px-4 py-2">string</td><td class="border px-4 py-2">"Nombre del Grupo"</td><td class="border px-4 py-2">Nombre del grupo o comunidad.</td></tr>
+            <tr><td class="border px-4 py-2">avatarUrl</td><td class="border px-4 py-2">string</td><td class="border px-4 py-2">Default</td><td class="border px-4 py-2">Imagen de avatar (redondo).</td></tr>
+            <tr><td class="border px-4 py-2">logoUrl</td><td class="border px-4 py-2">string</td><td class="border px-4 py-2">Default</td><td class="border px-4 py-2">Logo pequeño a la derecha del grupo.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- ========== ENDPOINT: CUTE-CALENDAR ========== -->
+      <section>
+        <h2 class="text-3xl font-semibold text-green-600 mb-4">📅 /canvas/cute-calendar</h2>
+        <p class="mb-2">Genera un calendario mensual estilizado y responsivo con personajes decorativos.</p>
+        <code class="block bg-gray-200 text-sm p-3 rounded mb-4">GET /canvas/cute-calendar</code>
+
+        <h3 class="text-xl font-semibold mb-2">Parámetros:</h3>
+        <table class="w-full text-left border-collapse border border-gray-300 mb-4">
+          <thead class="bg-gray-200">
+            <tr>
+              <th class="px-4 py-2 border">Parámetro</th>
+              <th class="px-4 py-2 border">Tipo</th>
+              <th class="px-4 py-2 border">Default</th>
+              <th class="px-4 py-2 border">Descripción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="border px-4 py-2">lang</td><td class="border px-4 py-2">string</td><td class="border px-4 py-2">"es"</td><td class="border px-4 py-2">Idioma del mes y días.</td></tr>
+            <tr><td class="border px-4 py-2">country</td><td class="border px-4 py-2">string</td><td class="border px-4 py-2">"MX"</td><td class="border px-4 py-2">Define si el calendario empieza en lunes o domingo.</td></tr>
+            <tr><td class="border px-4 py-2">month</td><td class="border px-4 py-2">int</td><td class="border px-4 py-2">Actual</td><td class="border px-4 py-2">Número del mes (1-12).</td></tr>
+            <tr><td class="border px-4 py-2">year</td><td class="border px-4 py-2">int</td><td class="border px-4 py-2">Actual</td><td class="border px-4 py-2">Año del calendario.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <footer class="text-center mt-20 te<xt-sm text-gray-500">
+        Hecho con por <a href="https://adfay.io">Adfay Inc.</a> | MIT License
+      </footer>
+    </div>
+  </body>
+</html>

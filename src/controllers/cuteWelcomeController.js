@@ -1,11 +1,10 @@
 const { createCanvas, loadImage, registerFont } = require('canvas');
 const path = require('path');
 
-// Registrar la fuente Poppins-Regular
 registerFont(path.join(__dirname, '..', 'assets', 'fonts', 'Poppins-Bold.ttf'), { family: 'Poppins' });
 
 exports.generateCuteWelcomeImage = async (req, res) => {
-  // Parámetros
+  // estos son los parametros debo mejoralos la neta
   const customText = (req.query.customText || 'BIENVENIDO/A').toUpperCase();; // Texto de bienvenida
   const username = (req.query.username || 'Nombre de Usuario').toUpperCase();
   const groupName = (req.query.groupName || 'Nombre del Grupo').toUpperCase();
@@ -17,11 +16,11 @@ exports.generateCuteWelcomeImage = async (req, res) => {
   const canvas = createCanvas(width, height);
   const context = canvas.getContext('2d');
 
-  // Fondo general
-  context.fillStyle = '#202C33'; // Fondo gris oscuro
+  // Fondo
+  context.fillStyle = '#202C33';
   context.fillRect(0, 0, width, height);
 
-  // Función para dibujar rectángulos con esquinas redondeadas
+  // dibujo
   const drawRoundedRect = (x, y, w, h, radius, color) => {
     context.beginPath();
     context.moveTo(x + radius, y); // Esquina superior izquierda
@@ -35,7 +34,7 @@ exports.generateCuteWelcomeImage = async (req, res) => {
   };
 
   // Definir posición y tamaño del avatar
-  const avatarSize = height - 60; // Tamaño cuadrado
+  const avatarSize = height - 60;
   let avatar;
   try {
     avatar = avatarUrl ? await loadImage(avatarUrl) : await loadImage(path.join(__dirname, '..', 'assets', 'default-avatar.png'));
@@ -53,13 +52,12 @@ exports.generateCuteWelcomeImage = async (req, res) => {
   }
 
   // Definir posición del avatar
-  const avatarX = width - avatarSize - 40; // 40px de margen derecho
-  const avatarY = 30; // Comenzando a 30px desde arriba
+  const avatarX = width - avatarSize - 40; 
+  const avatarY = 30; 
 
-  // Dibujar el borde del avatar (rectángulo con esquinas redondeadas)
   drawRoundedRect(avatarX, avatarY, avatarSize, avatarSize, 20, '#FFFFFF'); // Borde blanco
 
-  // Dibujar el avatar dentro del área definida
+  // Dibujar el avatar
   context.save();
   context.beginPath();
   context.moveTo(avatarX + 20, avatarY); // Esquina superior izquierda
