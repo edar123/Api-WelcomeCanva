@@ -7,7 +7,7 @@ Welcome Image API allows you to generate custom welcome images by specifying var
 
 ## API Endpoint
 
-- **URL:** `/canvas/generate-welcome`
+- **URL:** `/canvas/generate-welcome  o /canvas/cute-welcome`
 - **Method:** `GET`
 
 ## Parameters

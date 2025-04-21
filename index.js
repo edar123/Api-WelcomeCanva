@@ -1,9 +1,9 @@
 const express = require('express');
 const app = express();
-const port = 5357;
+const port = 4737;
 
-const canvasRoutes = require('./routes/canvas');
-const cuteWelcomeRouter = require('./routes/canvas'); // Nueva ruta
+const canvasRoutes = require('./src/routes/canvas');
+const cuteWelcomeRouter = require('./src/routes/canvas'); // Nueva ruta
 
 app.use('/canvas', canvasRoutes);
 
